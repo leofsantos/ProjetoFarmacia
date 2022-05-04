@@ -4,9 +4,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "tb_produto")
@@ -18,20 +21,24 @@ public class ProdutoModel {
 	
 	@NotBlank(message = "Nome do produto")
 	@Size(min=5,max=100)
-	private String name;
+	private String nome;
 	
 	@NotBlank(message = "Descrição do produto")
 	@Size(min=5,max=1000)
-	private String description;
+	private String descricao;
 	
 	@NotBlank(message = "Estoque do produto")
-	private int stock;
+	private int estoque;
 	
 	@NotBlank(message = "Valor do produto")
-	private double price;
+	private double valor;
 	
 	@Size(max=255)
 	private Long photo;
+	
+	@ManyToOne
+	@JsonIgnoreProperties("produtos")
+	private CategoriaModel categoria;
 
 	public Long getId() {
 		return id;
@@ -41,36 +48,36 @@ public class ProdutoModel {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
-	public int getStock() {
-		return stock;
+	public int getEstoque() {
+		return estoque;
 	}
 
-	public void setStock(int stock) {
-		this.stock = stock;
+	public void setEstoque(int estoque) {
+		this.estoque = estoque;
 	}
 
-	public double getPrice() {
-		return price;
+	public double getValor() {
+		return valor;
 	}
 
-	public void setPrice(double price) {
-		this.price = price;
+	public void setValor(double valor) {
+		this.valor = valor;
 	}
 
 	public Long getPhoto() {
@@ -80,5 +87,5 @@ public class ProdutoModel {
 	public void setPhoto(Long photo) {
 		this.photo = photo;
 	}
-	
+
 }
