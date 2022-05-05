@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -19,22 +20,19 @@ public class ProdutoModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank(message = "Nome do produto")
+	@NotBlank(message = "Insira o nome do produto")
 	@Size(min=5,max=100)
 	private String nome;
 	
-	@NotBlank(message = "Descrição do produto")
+	@NotBlank(message = "Insira a descrição do produto")
 	@Size(min=5,max=1000)
 	private String descricao;
 	
-	@NotBlank(message = "Estoque do produto")
+	@NotNull(message = "Insira a quantidade em estoque do produto")
 	private int estoque;
 	
-	@NotBlank(message = "Valor do produto")
+	@NotNull(message = "Insira o valor do produto")
 	private double valor;
-	
-	@Size(max=255)
-	private Long photo;
 	
 	@ManyToOne
 	@JsonIgnoreProperties("produtos")
@@ -78,14 +76,6 @@ public class ProdutoModel {
 
 	public void setValor(double valor) {
 		this.valor = valor;
-	}
-
-	public Long getPhoto() {
-		return photo;
-	}
-
-	public void setPhoto(Long photo) {
-		this.photo = photo;
 	}
 
 }
