@@ -1,5 +1,7 @@
 package org.generation.farmacia.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -26,13 +29,14 @@ public class ProdutoModel {
 	
 	@NotBlank(message = "Insira a descrição do produto")
 	@Size(min=5,max=1000)
-	private String descricao;
+	private String fabricante;
 	
 	@NotNull(message = "Insira a quantidade em estoque do produto")
-	private int estoque;
+	private Long estoque;
 	
-	@NotNull(message = "Insira o valor do produto")
-	private double valor;
+	@NotNull
+	@Positive(message = "Digite um valor maior que zero")
+	private BigDecimal valor;
 	
 	@ManyToOne
 	@JsonIgnoreProperties("produtos")
@@ -54,27 +58,27 @@ public class ProdutoModel {
 		this.nome = nome;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getFabricante() {
+		return fabricante;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setFabricante(String fabricante) {
+		this.fabricante = fabricante;
 	}
 
-	public int getEstoque() {
+	public Long getEstoque() {
 		return estoque;
 	}
 
-	public void setEstoque(int estoque) {
+	public void setEstoque(Long estoque) {
 		this.estoque = estoque;
 	}
 
-	public double getValor() {
+	public BigDecimal getValor() {
 		return valor;
 	}
 
-	public void setValor(double valor) {
+	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
 
